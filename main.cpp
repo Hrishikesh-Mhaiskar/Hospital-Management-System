@@ -23,6 +23,8 @@ class Employee : public Person
         double years_experience;
 
     public:
+        static int count;
+
         void display_details()
         {}
 };
@@ -63,6 +65,23 @@ class Doctor : public Employee
         {
             num_appointments--;
         }
+
+        Doctor()
+        {}
+
+        Doctor(string name, int age, char gender, int contact, double salary, double years_experience, string specialization)
+        {
+            Employee::count++;
+
+            this->name = name;
+            this->age = age;
+            this->gender = gender;
+            this->contact = contact;
+            this->emp_id = Employee::count;
+            this->salary = salary;
+            this->years_experience = years_experience;
+            this->specialization = specialization;
+        }
 };
 
 class Staff : public Employee
@@ -84,16 +103,35 @@ class Staff : public Employee
             cout << "Job Description: " << job_description << endl;
             cout << endl;
         }
+
+        Staff()
+        {}
+
+        Staff(string name, int age, char gender, int contact, double salary, double years_experience, string job_description)
+        {
+            Employee::count++;
+
+            this->name = name;
+            this->age = age;
+            this->gender = gender;
+            this->contact = contact;
+            this->emp_id = Employee::count;
+            this->salary = salary;
+            this->years_experience = years_experience;
+            this->job_description = job_description;
+        }
 };
 
 class Patient : public Person
 {
     protected:
-        int id;
+        int patient_id;
         Doctor doctor_assigned;
         bool is_appointment_scheduled;
     
     public:
+        static int count;
+
         void display_details()
         {
             cout << "Doctor Details:-\n" << endl;
@@ -101,7 +139,7 @@ class Patient : public Person
             cout << "Age: " << age << endl;
             cout << "Gender: " << gender << endl;
             cout << "Contact: " << "+91 " << contact << endl;
-            cout << "Patient ID: " << id << endl;
+            cout << "Patient ID: " << patient_id << endl;
             cout << "Doctor Name: " << doctor_assigned.get_name();
             cout << "Appointment Status: " << (is_appointment_scheduled)? "Scheduled\n" : "Not Scheduled\n";
             cout << endl;
@@ -138,4 +176,24 @@ class Patient : public Person
                 cout << endl;
             }
         }
+
+        Patient()
+        {}
+
+        void set_data(string name, int age, char gender, int contact, Doctor doctor_assigned)
+        {
+            Patient::count++;
+
+            this->name = name;
+            this->age = age;
+            this->gender = gender;
+            this->contact = contact;
+            this->patient_id = count;
+            this->doctor_assigned = doctor_assigned;
+            this->is_appointment_scheduled = false;
+
+        }
 };
+
+int Employee::count = 0;
+int Patient::count = 0;
