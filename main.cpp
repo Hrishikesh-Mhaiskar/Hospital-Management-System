@@ -24,9 +24,46 @@ int main()
         cout << "Enter option: ";
         cin >> input;
 
+        int sub_input;
+
         if(input == 1)
         {
-            // doctor manager
+            do
+            {
+                cout << "--------------------DOCTOR MANAGER------------------------\n" << endl;
+                cout << "Please select amongst the following options:" << endl;
+                cout << "1. Search by name" << endl;
+                cout << "2. Search by Id" << endl;
+                cout << "3. Back" << endl;
+                cout << "--------------------------------------------\n" << endl;
+
+                cout << "Enter option: ";
+                cin >> sub_input;
+
+                if(sub_input == 1)
+                {
+                    string name;
+
+                    cout << "Enter Doctor Name: ";
+                    getline(cin, name);
+
+                    search_doctor_by_name(name);
+                }
+                else if(sub_input == 2)
+                {
+                    int id;
+
+                    cout << "Enter Doctor id: ";
+                    cin >> id;
+
+                    search_doctor_by_id(id);
+                }
+                else if(sub_input != 1 || sub_input != 2 || sub_input != 3)
+                {
+                    cout << "Invalid Input" << endl;
+                    cout << endl;
+                }
+            } while (sub_input != 3);
         }
         else if(input == 2)
         {
