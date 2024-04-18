@@ -87,6 +87,7 @@ class Doctor : public Employee
             this->salary = salary;
             this->years_experience = years_experience;
             this->specialization = specialization;
+            this->num_appointments = 0;
         }
 
         ~Doctor()
@@ -234,6 +235,9 @@ class Patient : public Person
         {
             Patient::count--;
         }
+
+        friend void search_patient_by_name(string name);
+        friend void search_patient_by_id(int id);
 };
 
 int Employee::count = 0;
@@ -357,6 +361,26 @@ void search_patient_by_name(string name)
     for(int i = 0; i < staff_count; i++)
     {
         if(patients[i].name == name)
+        {
+            patients[i].display_details();
+            is_found = true;
+            break;
+        }
+    }
+
+    if(!is_found)
+    {
+        cout << "Patient details not found!" << endl;
+        cout << endl;
+    }
+}
+
+void search_patient_by_id(int id)
+{
+    bool is_found = false;
+    for(int i = 0; i < staff_count; i++)
+    {
+        if(patients[i].patient_id == id)
         {
             patients[i].display_details();
             is_found = true;
