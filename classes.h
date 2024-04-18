@@ -151,7 +151,7 @@ class Patient : public Person
 {
     protected:
         int patient_id;
-        Doctor doctor_assigned;
+        Doctor &doctor_assigned;
         bool is_appointment_scheduled;
     
     public:
@@ -165,7 +165,7 @@ class Patient : public Person
             cout << "Gender: " << gender << endl;
             cout << "Contact: " << "+91 " << contact << endl;
             cout << "Patient ID: " << patient_id << endl;
-            cout << "Doctor Name: " << doctor_assigned.get_name();
+            cout << "Doctor Name: " << doctor_assigned.get_name() << endl;;
             cout << "Appointment Status: " << (is_appointment_scheduled)? "Scheduled\n" : "Not Scheduled\n";
             cout << endl;
         }
@@ -202,12 +202,12 @@ class Patient : public Person
             }
         }
 
-        Patient()
+        Patient() : doctor_assigned(doctor_assigned)
         {
             Patient::count++;
         }
 
-        Patient(string name, int age, char gender, long long int contact, Doctor doctor_assigned)
+        Patient(string name, int age, char gender, long long int contact, Doctor &doctor_assigned) : doctor_assigned(doctor_assigned)
         {
             Patient::count++;
 
@@ -216,7 +216,6 @@ class Patient : public Person
             this->gender = gender;
             this->contact = contact;
             this->patient_id = count;
-            this->doctor_assigned = doctor_assigned;
             this->is_appointment_scheduled = false;
         }
 
@@ -234,6 +233,22 @@ class Patient : public Person
         ~Patient()
         {
             Patient::count--;
+        }
+
+        void get_doctor_details()
+        {
+            cout << endl;
+            doctor_assigned.display_details();
+        }
+
+        int get_id()
+        {
+            return patient_id;
+        }
+
+        string get_name()
+        {
+            return name;
         }
 
         friend void search_patient_by_name(string name);
