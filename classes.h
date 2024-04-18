@@ -159,7 +159,7 @@ class Patient : public Person
 
         void display_details()
         {
-            cout << "Doctor Details:-\n" << endl;
+            cout << "Patient Details:-\n" << endl;
             cout << "Name: " << name << endl;
             cout << "Age: " << age << endl;
             cout << "Gender: " << gender << endl;
