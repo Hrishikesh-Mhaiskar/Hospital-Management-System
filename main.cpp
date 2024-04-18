@@ -47,6 +47,8 @@ int main()
                     cout << "Enter Doctor Name: ";
                     getline(cin, name);
 
+                    getchar();
+
                     search_doctor_by_name(name);
                 }
                 else if(sub_input == 2)
