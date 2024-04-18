@@ -25,7 +25,7 @@ class Employee : public Person
     public:
         static int count;
 
-        void display_details()
+        virtual void display_details()
         {}
 };
 
@@ -67,7 +67,9 @@ class Doctor : public Employee
         }
 
         Doctor()
-        {}
+        {
+            Employee::count++;
+        }
 
         Doctor(string name, int age, char gender, int contact, double salary, double years_experience, string specialization)
         {
@@ -81,6 +83,11 @@ class Doctor : public Employee
             this->salary = salary;
             this->years_experience = years_experience;
             this->specialization = specialization;
+        }
+
+        ~Doctor()
+        {
+            Employee::count--;
         }
 };
 
@@ -105,7 +112,9 @@ class Staff : public Employee
         }
 
         Staff()
-        {}
+        {
+            Employee::count++;
+        }
 
         Staff(string name, int age, char gender, int contact, double salary, double years_experience, string job_description)
         {
@@ -119,6 +128,11 @@ class Staff : public Employee
             this->salary = salary;
             this->years_experience = years_experience;
             this->job_description = job_description;
+        }
+
+        ~Staff()
+        {
+            Employee::count--;
         }
 };
 
@@ -178,7 +192,9 @@ class Patient : public Person
         }
 
         Patient()
-        {}
+        {
+            Patient::count++;
+        }
 
         void set_data(string name, int age, char gender, int contact, Doctor doctor_assigned)
         {
@@ -192,6 +208,11 @@ class Patient : public Person
             this->doctor_assigned = doctor_assigned;
             this->is_appointment_scheduled = false;
 
+        }
+
+        ~Patient()
+        {
+            Patient::count--;
         }
 };
 
