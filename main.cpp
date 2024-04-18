@@ -39,6 +39,7 @@ int main()
 
                 cout << "Enter option: ";
                 cin >> sub_input;
+                cin.ignore();
 
                 if(sub_input == 1)
                 {
@@ -46,8 +47,6 @@ int main()
 
                     cout << "Enter Doctor Name: ";
                     getline(cin, name);
-
-                    getchar();
 
                     search_doctor_by_name(name);
                 }
@@ -60,7 +59,7 @@ int main()
 
                     search_doctor_by_id(id);
                 }
-                else if(sub_input != 1 || sub_input != 2 || sub_input != 3)
+                else if(sub_input != 3)
                 {
                     cout << "Invalid Input" << endl;
                     cout << endl;
