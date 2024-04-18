@@ -4,8 +4,9 @@ using namespace std;
 
 int main()
 {
-    for (int i = 0; i < 5; i++)
-    {
-        doctors[i].display_details();
-    }
+    string name;
+    getline(cin, name);
+
+
+    search_doctor_by_name(name);
 }

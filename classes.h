@@ -2,6 +2,7 @@
 #define CLASSES_H
 
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -92,6 +93,9 @@ class Doctor : public Employee
         {
             Employee::count--;
         }
+
+        friend void search_doctor_by_name(string name);
+        friend void search_doctor_by_id(int id);
 };
 
 class Staff : public Employee
@@ -137,6 +141,9 @@ class Staff : public Employee
         {
             Employee::count--;
         }
+
+        friend void search_staff_by_name(string name);
+        friend void search_staff_by_id(int id);
 };
 
 class Patient : public Person
@@ -229,8 +236,6 @@ class Patient : public Person
         }
 };
 
-
-
 int Employee::count = 0;
 int Patient::count = 0;
 
@@ -261,5 +266,109 @@ Patient patient10("Rajesh", 45, 'M', 9876543209, doctor5);
 Doctor doctors[] = {doctor1, doctor2, doctor3, doctor4, doctor5};
 Staff staff[] = {staff1, staff2, staff3, staff4, staff5};
 Patient patients[] = {patient1, patient2, patient3, patient4, patient5, patient6, patient7, patient8, patient9, patient10};
+
+const int doctor_count = 5;
+const int staff_count = 5;
+const int patient_count = 10;
+
+void search_doctor_by_name(string name)
+{
+    bool is_found = false;
+    for(int i = 0; i < doctor_count; i++)
+    {
+        if(doctors[i].name == name)
+        {
+            doctors[i].display_details();
+            is_found = true;
+            break;
+        }
+    }
+
+    if(!is_found)
+    {
+        cout << "Doctor details not found!" << endl;
+        cout << endl;
+    }
+}
+
+void search_doctor_by_id(int id)
+{
+    bool is_found = false;
+    for(int i = 0; i < doctor_count; i++)
+    {
+        if(doctors[i].emp_id == id)
+        {
+            doctors[i].display_details();
+            is_found = true;
+            break;
+        }
+    }
+
+    if(!is_found)
+    {
+        cout << "Doctor details not found!" << endl;
+        cout << endl;
+    }
+}
+
+void search_staff_by_name(string name)
+{
+    bool is_found = false;
+    for(int i = 0; i < staff_count; i++)
+    {
+        if(staff[i].name == name)
+        {
+            staff[i].display_details();
+            is_found = true;
+            break;
+        }
+    }
+
+    if(!is_found)
+    {
+        cout << "Staff details not found!" << endl;
+        cout << endl;
+    }
+}
+
+void search_staff_by_id(int id)
+{
+    bool is_found = false;
+    for(int i = 0; i < staff_count; i++)
+    {
+        if(staff[i].emp_id == id)
+        {
+            staff[i].display_details();
+            is_found = true;
+            break;
+        }
+    }
+
+    if(!is_found)
+    {
+        cout << "Staff details not found!" << endl;
+        cout << endl;
+    }
+}
+
+void search_patient_by_name(string name)
+{
+    bool is_found = false;
+    for(int i = 0; i < staff_count; i++)
+    {
+        if(patients[i].name == name)
+        {
+            patients[i].display_details();
+            is_found = true;
+            break;
+        }
+    }
+
+    if(!is_found)
+    {
+        cout << "Patient details not found!" << endl;
+        cout << endl;
+    }
+}
 
 #endif
