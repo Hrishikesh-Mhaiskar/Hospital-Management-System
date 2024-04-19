@@ -150,7 +150,7 @@ int main()
                     cout << "Enter Patient id: ";
                     cin >> id;
 
-                    Patient *ptr = new Patient;
+                    Patient *ptr = NULL;
 
                     for (int i = 0; i < patient_count; i++)
                     {

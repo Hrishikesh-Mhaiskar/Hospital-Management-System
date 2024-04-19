@@ -62,12 +62,12 @@ class Doctor : public Employee
 
         void add_appointment()
         {
-            num_appointments++;
+            this->num_appointments += 1;
         }
 
         void remove_appointment()
         {
-            num_appointments--;
+            this->num_appointments -= 1;
         }
 
         Doctor()
@@ -151,7 +151,7 @@ class Patient : public Person
 {
     protected:
         int patient_id;
-        Doctor &doctor_assigned;
+        Doctor *doctor_assigned;
         bool is_appointment_scheduled;
     
     public:
@@ -165,7 +165,7 @@ class Patient : public Person
             cout << "Gender: " << gender << endl;
             cout << "Contact: " << "+91 " << contact << endl;
             cout << "Patient ID: " << patient_id << endl;
-            cout << "Doctor Name: " << doctor_assigned.get_name() << endl;;
+            cout << "Doctor Name: " << doctor_assigned->get_name() << endl;;
             cout << "Appointment Status: " << (is_appointment_scheduled)? "Scheduled\n" : "Not Scheduled\n";
             cout << endl;
         }
@@ -179,7 +179,7 @@ class Patient : public Person
             }
             else
             {
-                doctor_assigned.add_appointment();
+                doctor_assigned->add_appointment();
                 is_appointment_scheduled = true;
                 cout << "Appointment Scheduled Successfully!" << endl;
                 cout << endl;
@@ -195,7 +195,7 @@ class Patient : public Person
             }
             else
             {
-                doctor_assigned.remove_appointment();
+                doctor_assigned->remove_appointment();
                 is_appointment_scheduled = false;
                 cout << "Appointment cancelled successfully!" << endl;
                 cout << endl;
@@ -207,7 +207,7 @@ class Patient : public Person
             Patient::count++;
         }
 
-        Patient(string name, int age, char gender, long long int contact, Doctor &doctor_assigned) : doctor_assigned(doctor_assigned)
+        Patient(string name, int age, char gender, long long int contact, Doctor *doctor)
         {
             Patient::count++;
 
@@ -215,18 +215,19 @@ class Patient : public Person
             this->age = age;
             this->gender = gender;
             this->contact = contact;
+            this->doctor_assigned = doctor;
             this->patient_id = count;
             this->is_appointment_scheduled = false;
         }
 
-        void set_data(string name, int age, char gender, long long int contact, Doctor doctor_assigned)
+        void set_data(string name, int age, char gender, long long int contact, Doctor &doctor_assigned)
         {
             this->name = name;
             this->age = age;
             this->gender = gender;
             this->contact = contact;
             this->patient_id = count;
-            this->doctor_assigned = doctor_assigned;
+            this->doctor_assigned = &doctor_assigned;
             this->is_appointment_scheduled = false;
         }
 
@@ -238,7 +239,7 @@ class Patient : public Person
         void get_doctor_details()
         {
             cout << endl;
-            doctor_assigned.display_details();
+            doctor_assigned->display_details();
         }
 
         int get_id()
@@ -270,16 +271,16 @@ Staff staff3("Rahul Singh", 35, 'M', 9876543202, 40000.0, 5.5, "Janitor");
 Staff staff4("Sneha Gupta", 28, 'F', 9876543203, 32000.0, 2.0, "Lab Technician");
 Staff staff5("Ananya Reddy", 40, 'F', 9876543204, 38000.0, 6.0, "Pharmacist");
 
-Patient patient1("Rahul", 25, 'M', 9876543200, doctor1);
-Patient patient2("Priya", 30, 'F', 9876543201, doctor2);
-Patient patient3("Vikram", 35, 'M', 9876543202, doctor3);
-Patient patient4("Neha", 28, 'F', 9876543203, doctor4);
-Patient patient5("Ritu", 40, 'F', 9876543204, doctor5);
-Patient patient6("Amit", 32, 'M', 9876543205, doctor1);
-Patient patient7("Kavita", 28, 'F', 9876543206, doctor2);
-Patient patient8("Suresh", 33, 'M', 9876543207, doctor3);
-Patient patient9("Mona", 38, 'F', 9876543208, doctor4);
-Patient patient10("Rajesh", 45, 'M', 9876543209, doctor5);
+Patient patient1("Rahul", 25, 'M', 9876543200, &doctor1);
+Patient patient2("Priya", 30, 'F', 9876543201, &doctor2);
+Patient patient3("Vikram", 35, 'M', 9876543202, &doctor3);
+Patient patient4("Neha", 28, 'F', 9876543203, &doctor4);
+Patient patient5("Ritu", 40, 'F', 9876543204, &doctor5);
+Patient patient6("Amit", 32, 'M', 9876543205, &doctor1);
+Patient patient7("Kavita", 28, 'F', 9876543206, &doctor2);
+Patient patient8("Suresh", 33, 'M', 9876543207, &doctor3);
+Patient patient9("Mona", 38, 'F', 9876543208, &doctor4);
+Patient patient10("Rajesh", 45, 'M', 9876543209, &doctor5);
 
 
 Doctor doctors[] = {doctor1, doctor2, doctor3, doctor4, doctor5};
@@ -373,7 +374,7 @@ void search_staff_by_id(int id)
 void search_patient_by_name(string name)
 {
     bool is_found = false;
-    for(int i = 0; i < staff_count; i++)
+    for(int i = 0; i < patient_count; i++)
     {
         if(patients[i].name == name)
         {
@@ -393,7 +394,7 @@ void search_patient_by_name(string name)
 void search_patient_by_id(int id)
 {
     bool is_found = false;
-    for(int i = 0; i < staff_count; i++)
+    for(int i = 0; i < patient_count; i++)
     {
         if(patients[i].patient_id == id)
         {
