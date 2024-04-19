@@ -95,6 +95,21 @@ class Doctor : public Employee
             Employee::count--;
         }
 
+        // Overloading ++ operator to add an appointment
+        Doctor& operator++()
+        {
+            num_appointments++;
+            return *this;
+        }
+
+        // Overloading -- operator to remove an appointment
+        Doctor& operator--()
+        {
+            if (num_appointments > 0)
+                num_appointments--;
+            return *this;
+        }
+
         friend void search_doctor_by_name(string name);
         friend void search_doctor_by_id(int id);
 };
@@ -179,7 +194,7 @@ class Patient : public Person
             }
             else
             {
-                doctor_assigned->add_appointment();
+                ++(*doctor_assigned);
                 is_appointment_scheduled = true;
                 cout << "Appointment Scheduled Successfully!" << endl;
                 cout << endl;
@@ -195,7 +210,7 @@ class Patient : public Person
             }
             else
             {
-                doctor_assigned->remove_appointment();
+                --(*doctor_assigned);
                 is_appointment_scheduled = false;
                 cout << "Appointment cancelled successfully!" << endl;
                 cout << endl;
