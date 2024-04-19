@@ -9,6 +9,9 @@ The Hospital Management System is a software application designed to streamline 
 - **Appointment Scheduling**: Schedule, reschedule, and cancel appointments between patients and doctors.
 - **User Interface**: Implement a user-friendly interface for interacting with the system, including command-line interface options.
 
+## Here is a visual representation of the classes we have defined-
+![Visual Representation of Classes](Classes visual representation.png)
+
 ## Installation
 
 To run the Hospital Management System project, follow these steps:
